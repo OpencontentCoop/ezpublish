@@ -188,6 +188,15 @@ class eZExpiryHandler
         eZDebug::writeStrict( __METHOD__ . " is deprecated. See EZP-22749.", __METHOD__ . " is deprecated" );
     }
 
+    static function refresh(): void
+    {
+        if ( isset( $GLOBALS['eZExpiryHandlerInstance'] ) )
+        {
+            unset( $GLOBALS['eZExpiryHandlerInstance'] );
+        }
+    }
+
+
     /**
      * Holds the expiry timestamps array
      * @var array
