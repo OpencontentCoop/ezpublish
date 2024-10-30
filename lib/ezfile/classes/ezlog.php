@@ -47,7 +47,13 @@ class eZLog
         if ( $logFile )
         {
             $time = date( "M d Y H:i:s", strtotime( "now" ) );
-            $logMessage = "[ " . $time . " ] $message\n";
+            $ip = eZSys::clientIP();
+            if ( !$ip )
+            {
+                $ip = eZSys::serverVariable( 'HOSTNAME', true );
+            }
+            $logIdentifier = str_replace('.log', '', $logName);
+            $logMessage = "[ " . $time . " ] [" . $ip . "] [" . $logIdentifier . "] $message\n";
             @fwrite( $logFile, $logMessage );
             @fclose( $logFile );
             if ( !$fileExisted )
