@@ -1005,7 +1005,8 @@ class eZScript
         {
             if ( function_exists( 'posix_getuid' ) )
             {
-                if( posix_getuid() === 0 )
+                if( posix_getuid() === 0
+                    && eZINI::instance('file.ini')->variable( 'FileSettings', 'AllowRootUser' ) == 'disabled' )
                 {
                     if( !$options['allow-root-user'] )
                     {
