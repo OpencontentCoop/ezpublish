@@ -182,15 +182,16 @@ ALTER TABLE ezworkflow_group ALTER COLUMN id SET DEFAULT nextval('ezworkflow_gro
 ALTER TABLE ezworkflow_process ALTER COLUMN id SET DEFAULT nextval('ezworkflow_process_id_seq');
 
 /*-- NOTE: the above statements were obtained by executing the following SQLs:
-SELECT 'ALTER SEQUENCE ' || regexp_replace(def.adsrc, 'nextval.*''(.+)''.*', E'\\1') || ' RENAME TO ' || tbl.relname || '_' || col.attname || '_seq;'
+SELECT 'ALTER SEQUENCE ' || regexp_replace(pg_get_expr(def.adbin, def.adrelid), 'nextval.*''(.+)''.*', E'\\1') || ' RENAME TO ' || tbl.relname || '_' || col.attname || '_seq;'
+
 FROM pg_class tbl
 JOIN pg_attribute col ON col.attrelid = tbl.oid
 JOIN pg_attrdef def ON def.adnum = col.attnum AND def.adrelid = col.attrelid
-WHERE def.adsrc LIKE 'nextval(%';
+WHERE pg_get_expr(def.adbin, def.adrelid) LIKE 'nextval(%';
 
 SELECT 'ALTER TABLE ' || tbl.relname || ' ALTER COLUMN ' || col.attname || ' SET DEFAULT nextval(''' || tbl.relname || '_' || col.attname || '_seq'');'
 FROM pg_class tbl
 JOIN pg_attribute col ON col.attrelid = tbl.oid
 JOIN pg_attrdef def ON def.adnum = col.attnum AND def.adrelid = col.attrelid
-WHERE def.adsrc LIKE 'nextval(%';
+WHERE pg_get_expr(def.adbin, def.adrelid) LIKE 'nextval(%';
 */
