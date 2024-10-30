@@ -61,7 +61,7 @@ class eZModuleParamsOperator
         {
             case 'module_params':
             {
-                $operatorValue = $GLOBALS['eZRequestedModuleParams'];
+                $operatorValue = $GLOBALS['eZRequestedModuleParams'] ?? [];
             } break;
         }
     }
