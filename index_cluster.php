@@ -18,9 +18,39 @@ if ( file_exists( 'config.php' ) )
 if ( file_exists( 'config.cluster.php' ) )
     include( 'config.cluster.php' );
 
+// find config file from $_SERVER param
+$filename = rawurldecode( ltrim( $_SERVER['REQUEST_URI'], '/' ) );
+if ( isset( $_SERVER['SOTTOISTANZA'] ) && !empty( $_SERVER['SOTTOISTANZA'] )
+     && strpos( $filename, 'var/' . $_SERVER['SOTTOISTANZA'] . '/' ) !== false)
+{
+    $configClusterIstance = 'config_cluster_' . $_SERVER['SOTTOISTANZA'] . '.php';
+    if ( !file_exists( $configClusterIstance ) )
+    {
+        $configClusterIstance = 'settings/cluster-config/config_cluster_' . $_SERVER['SOTTOISTANZA'] . '.php';
+    }
+    if ( file_exists( $configClusterIstance ) )
+    {
+        include( $configClusterIstance );
+        define('OPENCONTENT_CURRENT_INSTANCE', $_SERVER['SOTTOISTANZA'] );
+    }
+}
+elseif ( isset($_SERVER['ISTANZA']))
+{
+    $configClusterIstance = 'config_cluster_' . $_SERVER['ISTANZA'] . '.php';
+    if ( !file_exists( $configClusterIstance ) )
+    {
+        $configClusterIstance = 'settings/cluster-config/config_cluster_' . $_SERVER['ISTANZA'] . '.php';
+    }
+    if ( file_exists( $configClusterIstance ) )
+    {
+        include( $configClusterIstance );
+        define( 'OPENCONTENT_CURRENT_INSTANCE', $_SERVER['ISTANZA'] );
+    }
+}
+
 if ( !defined( 'CLUSTER_STORAGE_BACKEND' ) || CLUSTER_STORAGE_BACKEND === null )
 {
-    if ( CLUSTER_ENABLE_DEBUG )
+    if ( defined( 'CLUSTER_ENABLE_DEBUG' ) && CLUSTER_ENABLE_DEBUG )
     {
         $message = "Clustering is disabled";
     }
@@ -63,7 +93,7 @@ else
 
 if ( !file_exists( $clusterGatewayFile ) )
 {
-    if ( CLUSTER_ENABLE_DEBUG )
+    if ( defined( 'CLUSTER_ENABLE_DEBUG' ) && CLUSTER_ENABLE_DEBUG )
     {
         $message = "Unable to open storage backend gateway class definition file '$clusterGatewayFile'";
     }
