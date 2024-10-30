@@ -228,7 +228,8 @@ class ezpContentFieldSet implements ArrayAccess, Iterator
         // level 1 ezpFieldSet
         if ( $this->childrenFieldSets !== null )
         {
-            $this->iteratorData = $this->childrenFieldSets[$this->activeLanguage]->fields;
+            $this->iteratorData = isset( $this->childrenFieldSets[$this->activeLanguage] ) ?
+                $this->childrenFieldSets[$this->activeLanguage]->fields : [];
             $this->iteratorPointer = array_keys( $this->iteratorData );
         }
         else
