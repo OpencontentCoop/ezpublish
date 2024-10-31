@@ -336,7 +336,10 @@ class eZContentCacheManager
     static function dependencyInfo( $classID, $ignoreINISettings = false )
     {
         $ini = eZINI::instance( 'viewcache.ini' );
-        $info = false;
+        $info = [
+            'clear_cache_type' => false,
+            'clear_cache_exclusive' => false,
+        ];
 
         if ( $ignoreINISettings || $ini->variable( 'ViewCacheSettings', 'SmartCacheClear' ) !== 'disabled' )
         {

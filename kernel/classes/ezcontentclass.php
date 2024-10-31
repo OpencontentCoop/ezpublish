@@ -52,7 +52,7 @@ class eZContentClass extends eZPersistentObject
             else
                 $this->DescriptionList->initDefault();
         }
-        $this->DataMap = false;
+        $this->DataMap = [];
     }
 
     static function definition()

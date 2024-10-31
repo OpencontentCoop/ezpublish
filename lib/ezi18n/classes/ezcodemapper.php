@@ -382,7 +382,7 @@ class eZCodeMapper
                                 break;
                             if ( $hasHexValues )
                             {
-                                $unicodeValue = hexdec( substr( $line, $hexPos, 4 ) );
+                                $unicodeValue = hexdec( rtrim( substr( $line, $hexPos, 4 ), '+-' ) );
                                 $unicodeData = array( 'value' => $unicodeValue,
                                                       'type' => 'unicode' );
 //                                 print( "unicode U+ '$unicodeValue'\n" );
@@ -438,7 +438,7 @@ class eZCodeMapper
                                 break;
                             if ( $hasHexValues )
                             {
-                                $asciiValue = hexdec( substr( $line, $hexPos, 4 ) );
+                                $asciiValue = hexdec( rtrim( substr( $line, $hexPos, 4 ), '+-' ) );
 //                                 print( "unicode ASCII '$asciiValue'\n" );
                                 $unicodeData = array( 'value' => $asciiValue,
                                                       'type' => 'ascii' );

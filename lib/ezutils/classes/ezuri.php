@@ -618,10 +618,10 @@ class eZURI
             $serverURL = self::$transformURIMode;
         }
 
-        if ( preg_match( "#^[a-zA-Z0-9]+:#", $href ) || substr( $href, 0, 2 ) == '//' )
+        if ( preg_match( "#^[a-zA-Z0-9]+:#", (string)$href ) || substr( (string)$href, 0, 2 ) == '//' )
             return false;
 
-        if ( strlen( $href ) == 0 )
+        if ( strlen( (string)$href ) == 0 )
             $href = '/';
         else if ( $href[0] == '#' )
         {

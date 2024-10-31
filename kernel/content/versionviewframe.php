@@ -151,7 +151,7 @@ if ( $Module->hasActionParameter( 'SiteAccess' ) )
 {
     $siteaccess = $Module->actionParameter( 'SiteAccess' );
 }
-
+$siteaccessLocaleMap = [];
 // Find ContentObjectLocale for all site accesses in RelatedSiteAccessList
 foreach ( $ini->variable( 'SiteAccessSettings', 'RelatedSiteAccessList' ) as $relatedSA )
 {
@@ -212,7 +212,7 @@ if ( $LanguageCode )
 }
 
 $tpl = eZTemplate::factory();
-
+$http = eZHTTPTool::instance();
 if ( $http->hasSessionVariable( 'LastAccessesVersionURI' ) )
 {
     $tpl->setVariable( 'redirect_uri', $http->sessionVariable( 'LastAccessesVersionURI' ) );

@@ -263,7 +263,7 @@ if ( $searchSectionID != -1 )
 
 $Result = array();
 
-if ( trim( $ViewMode ) != '' )
+if ( trim( (string)$ViewMode ) != '' )
 {
     // Fetch override template for viewmode if wanted
     $Result['content'] = $tpl->fetch( "design:content/advancedsearch/$ViewMode.tpl" );

@@ -458,7 +458,7 @@ class ezoeServerFunctions extends ezjscServerFunctions
      * Gets current users bookmarks by offset and limit
      *
      * @param array $args  0 => node id:1, 1 => offset:0, 2 => limit:10
-     * @return hash
+     * @return array
     */
     public static function browse( $args )
     {
@@ -535,7 +535,7 @@ class ezoeServerFunctions extends ezjscServerFunctions
 
         return array(
             'list' => $list,
-            'count' => count( $nodeArray ),
+            'count' => $nodeArray ? count( $nodeArray ) : 0,
             'total_count' => (int) $count,
             'node' => ezjscAjaxContent::nodeEncode( $node, array('fetchPath' => true ), 'raw' ),
             'offset' => $offset,

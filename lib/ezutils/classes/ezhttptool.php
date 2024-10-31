@@ -593,7 +593,7 @@ class eZHTTPTool
     static function redirect( $path, $parameters = array(), $status = false, $encodeURL = true, $returnRedirectObject = false )
     {
         $url = eZHTTPTool::createRedirectUrl( $path, $parameters );
-        if ( strlen( $status ) > 0 )
+        if ( strlen( (string)$status ) > 0 )
         {
             header( $_SERVER['SERVER_PROTOCOL'] .  " " . $status );
             eZHTTPTool::headerVariable( "Status", $status );

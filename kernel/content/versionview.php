@@ -10,12 +10,12 @@ $http = eZHTTPTool::instance();
 $Offset = (int)$Params['Offset'];
 $ObjectID = (int)$ObjectID;
 $EditVersion = (int)$EditVersion;
-$LanguageCode = htmlspecialchars( $LanguageCode );
+$LanguageCode = htmlspecialchars( (string)$LanguageCode );
 $viewParameters = array( 'offset' => $Offset );
 
 // Will be sent from the content/edit page and should be kept
 // incase the user decides to continue editing.
-$FromLanguage = htmlspecialchars( $Params['FromLanguage'] );
+$FromLanguage = htmlspecialchars( (string)$Params['FromLanguage'] );
 
 if ( $http->hasPostVariable( 'BackButton' )  )
 {

@@ -419,7 +419,7 @@ class eZScript
         {
             if ( $this->DebugMessage )
                 fputs( STDERR, $this->DebugMessage );
-            fputs( STDERR, eZDebug::printReport( false, $webOutput, true,
+            fputs( STDERR, (string)eZDebug::printReport( false, $webOutput, true,
                                                  $this->AllowedDebugLevels, $this->UseDebugAccumulators,
                                                  $this->UseDebugTimingPoints, $this->UseIncludeFiles ) );
         }
